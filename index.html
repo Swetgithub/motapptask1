@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Inspirational Quotes App</title>
+<style>
+* {
+ font-size: 2.5vw;
+ font-family: Arial, sans-serif;
+  }
+ body {
+ background-color: #f0f8ff;
+margin: 0;
+padding: 0;
+}
+ header {
+background-color: #4b0082;
+color: #fff;
+padding: 1vw;
+text-align: center;
+border-radius: 1vw;
+margin: 2vw auto;
+width: 80%;
+}
+ section {
+ border: 2px solid #008080;
+ border-radius: 20px;
+ padding: 1vw;
+ text-align: center;
+ margin: 1vw auto;
+  width: 80%;
+ }
+  button {
+background-color: #ffa07a;
+color: #000;
+border: none;
+ border-radius: 10px;
+ padding: 1vw 2vw;
+ font-size: 2vw;
+ cursor: pointer;
+ }
+ button:hover {
+ background-color: #ff7f50;
+ }
+ </style>
+</head>
+<body>
+ <header>
+        <h1>Inspirational Quotes by Swet</h1>
+    </header>
+    <main>
+        <center>
+            <button onclick="fetchQuote()">Show Quote</button>
+            <section id="quote"></section>
+            <section id="author"></section>
+        </center>
+    </main>
+    <script>
+        function fetchQuote() {
+            const quoteElement = document.getElementById("quote");
+            const authorElement = document.getElementById("author");
+            const apiEndpoint = "https://quotes-api-self.vercel.app/quote";
+
+            fetch(apiEndpoint)
+                .then(response => response.json())
+                .then(data => {
+                    quoteElement.textContent = `"${data.quote}"`;
+                    authorElement.textContent = `~ ${data.author}`;
+                })
+                .catch(error => {
+                    quoteElement.textContent = `Oops! Something went wrong: ${error.message}`;
+                    authorElement.textContent = "";
+                });
+        }
+    </script>
+</body>
+</html>
